@@ -12,18 +12,18 @@ class RocketChatHandler extends AbstractProcessingHandler
     /**
      * @var Client;
      */
-    private Client $client;
+    private $client;
 
     /**
      * @var array
      */
-    private array $webhooks;
+    private $webhooks;
 
     /**
      * Instance of the SlackRecord util class preparing data for Slack API.
      * @var RocketChatRecord
      */
-    private RocketChatRecord $rocketChatRecord;
+    private $rocketChatRecord;
 
     /**
      * RocketChatHandler constructor.
@@ -35,12 +35,13 @@ class RocketChatHandler extends AbstractProcessingHandler
      * @param bool $bubble
      */
     public function __construct(
-        array  $webhooks,
+        array $webhooks,
         string $username = null,
         string $emoji = null,
-        int    $level = Logger::ERROR,
-        bool   $bubble = true
-    ) {
+        int $level = Logger::ERROR,
+        bool $bubble = true
+    )
+    {
         parent::__construct($level, $bubble);
 
         $this->webhooks = $webhooks;

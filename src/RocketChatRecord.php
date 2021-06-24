@@ -19,23 +19,23 @@ class RocketChatRecord
      * Name that will appear in Rocket.Chat
      * @var string|null
      */
-    private ?string $username;
+    private $username;
 
     /**
      * Emoji that will appear as the user
      * @var string|null
      */
-    private ?string $emoji;
+    private $emoji;
 
     /**
      * @var FormatterInterface
      */
-    private ?FormatterInterface $formatter;
+    private $formatter;
 
     /**
      * @var NormalizerFormatter
      */
-    private NormalizerFormatter $normalizerFormatter;
+    private $normalizerFormatter;
 
     /**
      * Colors for a given log level.
@@ -57,7 +57,8 @@ class RocketChatRecord
         string $username = null,
         string $emoji = null,
         FormatterInterface $formatter = null
-    ) {
+    )
+    {
         $this->username = $username;
         $this->emoji = $emoji;
         $this->formatter = $formatter;
