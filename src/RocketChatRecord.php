@@ -1,6 +1,6 @@
 <?php
 
-namespace Sysvale\Logging;
+namespace Drugovich\Logging;
 
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\NormalizerFormatter;
@@ -19,30 +19,30 @@ class RocketChatRecord
      * Name that will appear in Rocket.Chat
      * @var string|null
      */
-    private $username;
+    private ?string $username;
 
     /**
      * Emoji that will appear as the user
      * @var string|null
      */
-    private $emoji;
+    private ?string $emoji;
 
     /**
      * @var FormatterInterface
      */
-    private $formatter;
+    private ?FormatterInterface $formatter;
 
     /**
      * @var NormalizerFormatter
      */
-    private $normalizerFormatter;
+    private NormalizerFormatter $normalizerFormatter;
 
     /**
      * Colors for a given log level.
      *
      * @var array
      */
-    private $levelColors = [
+    private array $levelColors = [
         Logger::DEBUG     => "#9E9E9E",
         Logger::INFO      => "#4CAF50",
         Logger::NOTICE    => "#607D8B",
@@ -65,7 +65,7 @@ class RocketChatRecord
         $this->normalizerFormatter = new NormalizerFormatter();
     }
 
-    public function getRocketChatData(array $record)
+    public function getRocketChatData(array $record): array
     {
         $dataArray = array();
         $attachment = array(
@@ -111,7 +111,7 @@ class RocketChatRecord
      *
      * @return string
      */
-    public function stringify($fields)
+    public function stringify(array $fields): string
     {
         $normalized = $this->normalizerFormatter->format($fields);
         $prettyPrintFlag = defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT : 128;
@@ -131,12 +131,12 @@ class RocketChatRecord
     /**
      * Generates attachment field
      *
-     * @param string       $title
-     * @param string|array $value
+     * @param string $title
+     * @param array|string $value
      *
      * @return array
      */
-    private function generateAttachmentField($title, $value)
+    private function generateAttachmentField(string $title, array|string $value): array
     {
         $value = is_array($value)
             ? sprintf('```%s```', $this->stringify($value))
@@ -156,7 +156,7 @@ class RocketChatRecord
      *
      * @return array
      */
-    private function generateAttachmentFields(array $data)
+    private function generateAttachmentFields(array $data): array
     {
         $fields = array();
         foreach ($this->normalizerFormatter->format($data) as $key => $value) {

@@ -5,7 +5,7 @@ namespace Tests;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
-use Sysvale\Logging\RocketChatRecord;
+use Drugovich\Logging\RocketChatRecord;
 
 class RocketChatRecordTest extends TestCase
 {

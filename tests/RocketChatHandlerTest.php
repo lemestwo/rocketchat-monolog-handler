@@ -10,7 +10,7 @@ use Monolog\Formatter\FormatterInterface;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
-use Sysvale\Logging\RocketChatHandler;
+use Drugovich\Logging\RocketChatHandler;
 
 class RocketChatHandlerTest extends TestCase
 {

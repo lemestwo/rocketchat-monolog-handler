@@ -1,35 +1,29 @@
 <?php
 
-namespace Sysvale\Logging;
+namespace Drugovich\Logging;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
-use Sysvale\Logging\RocketChatRecord;
 
 class RocketChatHandler extends AbstractProcessingHandler
 {
     /**
-     * @var \GuzzleHttp\Client;
+     * @var Client;
      */
-    private $client;
-
-    /**
-     * Name that will appear in Rocket.Chat
-     * @var string|null
-     */
-    private $username;
+    private Client $client;
 
     /**
      * @var array
      */
-    private $webhooks;
+    private array $webhooks;
 
     /**
      * Instance of the SlackRecord util class preparing data for Slack API.
      * @var RocketChatRecord
      */
-    private $rocketChatRecord;
+    private RocketChatRecord $rocketChatRecord;
 
     /**
      * RocketChatHandler constructor.
@@ -50,7 +44,6 @@ class RocketChatHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
 
         $this->webhooks = $webhooks;
-        $this->username = $username;
 
         $this->client = new Client();
 
@@ -63,7 +56,7 @@ class RocketChatHandler extends AbstractProcessingHandler
 
     /**
      * @param array $record
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     protected function write(array $record): void
     {
