@@ -84,7 +84,7 @@ class RocketChatRecord
         if ($this->formatter) {
             $attachment['text'] = $this->formatter->format($record);
         } else {
-            $attachment['text'] = $record['message'];
+            $dataArray['text'] = sprintf("```%s```",$record['message']);
         }
 
         foreach (array('extra', 'context') as $key) {
@@ -161,7 +161,9 @@ class RocketChatRecord
     {
         $fields = array();
         foreach ($this->normalizerFormatter->format($data) as $key => $value) {
-            $fields[] = $this->generateAttachmentField($key, $value);
+            if($key !== 'exception') {
+                $fields[] = $this->generateAttachmentField($key, $value);
+            }
         }
 
         return $fields;
